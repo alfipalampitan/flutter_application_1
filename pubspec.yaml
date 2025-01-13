@@ -64,6 +64,15 @@ flutter:
     - assets/images/image3.jpg
     - assets/images/dana-protected.jpg
     - assets/images/receipt.png
+    - assets/images/visa_logo.png
+    - assets/images/bri_logo.png
+    - assets/images/cimb_logo.png
+    - assets/images/bca_logo.png
+    - assets/images/indomaret_logo.png
+    - assets/images/alfamart_logo.png
+    - assets/images/alfamidi_logo.png
+    - assets/images/lawson_logo.png
+    - assets/images/mastercard_logo.png
     
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
