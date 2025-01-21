@@ -2,6 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_application_1/IsiSaldo/isi_saldo_page.dart';
+import 'package:flutter_application_1/aktivitas/aktivitas.dart';
+import 'package:flutter_application_1/kirim/kirim.dart';
+import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/minta/Minta.dart';
+import 'package:flutter_application_1/profile/profile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Import FontAwesome
 
 void main() {
@@ -13,6 +19,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        // Halaman utama
+        '/home': (context) => DanaHome(),
+        '/aktivitas': (context) => WalletScreen(),
+        '/minta': (context) => MintaUangPage(),
+        '/kirim': (context) => KirimUangPage(),
+        '/profile': (context) => DanaProfileScreen(),
+        '/isiSaldo': (context) => IsiSaldoPage(),
+      },
       home: DanaHome(),
     );
   }
@@ -455,7 +471,7 @@ class DanaHome extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Pastikan menggunakan tipe fixed
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         items: [
           BottomNavigationBarItem(
@@ -481,13 +497,13 @@ class DanaHome extends StatelessWidget {
               width: 60,
               height: 50,
               decoration: BoxDecoration(
-                color: Colors.blue, // Warna biru
-                shape: BoxShape.circle, // Membuat berbentuk bulat
+                color: Colors.blue,
+                shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.qr_code,
-                color: Colors.white, // Ikon berwarna putih
-                size: 30, // Ukuran ikon lebih besar
+                color: Colors.white,
+                size: 30,
               ),
             ),
             label: 'Pay',
@@ -507,8 +523,36 @@ class DanaHome extends StatelessWidget {
             label: 'Saya',
           ),
         ],
-        selectedItemColor: Colors.grey,
+        selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(
+                  context, '/home'); // Navigasi ke halaman Beranda
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(
+                  context, '/aktivitas'); // Navigasi ke halaman Aktivitas
+              break;
+            case 2:
+              Navigator.pushReplacementNamed(
+                  context, '/minta'); // Navigasi ke halaman Pay
+              break;
+            case 3:
+              Navigator.pushReplacementNamed(
+                  context, '/kirim'); // Navigasi ke halaman Dompet
+              break;
+            case 4:
+              Navigator.pushReplacementNamed(
+                  context, '/profile'); // Navigasi ke halaman Saya
+              break;
+            case 5:
+              Navigator.pushReplacementNamed(
+                  context, '/isiSaldo'); // Navigasi ke halaman Dompet
+              break;
+          }
+        },
       ),
     );
   }
