@@ -156,10 +156,31 @@ class DanaHome extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildTopIcon(MdiIcons.lineScan, 'Pindai'),
-                  _buildTopIcon(MdiIcons.plusBoxOutline, 'Isi Saldo'),
-                  _buildTopIcon(MdiIcons.send, 'Kirim'),
-                  _buildTopIcon(Icons.request_page, 'Minta'),
+                  InkWell(
+                    onTap: () {
+                      // Navigasi ke halaman pindai (anda perlu membuat halaman ini)
+                      Navigator.pushNamed(context, '/pindai');
+                    },
+                    child: _buildTopIcon(MdiIcons.lineScan, 'Pindai'),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/isiSaldo');
+                    },
+                    child: _buildTopIcon(MdiIcons.plusBoxOutline, 'Isi Saldo'),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/kirim');
+                    },
+                    child: _buildTopIcon(MdiIcons.send, 'Kirim'),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/minta');
+                    },
+                    child: _buildTopIcon(Icons.request_page, 'Minta'),
+                  ),
                 ],
               ),
             ),
@@ -652,7 +673,6 @@ class DanaHome extends StatelessWidget {
       ],
     );
   }
-
 
   Widget _buildTopIcon(IconData icon, String label) {
     return Column(
