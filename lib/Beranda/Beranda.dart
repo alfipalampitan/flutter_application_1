@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -14,6 +15,83 @@ void main() {
   runApp(MyApp());
 }
 
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  double _opacity = 0.0; // Untuk efek fade-in
+  double _position = -100; // Untuk efek slide-in
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Jalankan animasi saat halaman dimuat
+    Timer(Duration(milliseconds: 300), () {
+      setState(() {
+        _opacity = 1.0; // Mulai animasi fade-in
+        _position = 0; // Geser logo ke posisi final
+      });
+    });
+
+    // Navigasi ke halaman utama setelah 3 detik
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, '/home');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blue,
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Animasi Slide-in dan Fade-in Logo
+                AnimatedPositioned(
+                  duration: Duration(seconds: 1),
+                  curve: Curves.easeInOut,
+                  top: MediaQuery.of(context).size.height / 2 + _position,
+                  left: MediaQuery.of(context).size.width / 2 - 50,
+                  child: AnimatedOpacity(
+                    duration: Duration(seconds: 1),
+                    opacity: _opacity,
+                    child: Image.asset(
+                      'assets/images/Dana-logo.png',
+                      color: Colors.white,
+                      width: 100,
+                      height: 100,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                // Animasi Fade-in Text
+                AnimatedOpacity(
+                  duration: Duration(seconds: 1),
+                  opacity: _opacity,
+                  child: Text(
+                    "DANA App",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,6 +100,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // Halaman utama
+        '/': (context) => SplashScreen(),
         '/home': (context) => DanaHome(),
         '/aktivitas': (context) => WalletScreen(),
         '/minta': (context) => MintaUangPage(),
@@ -29,7 +108,6 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => DanaProfileScreen(),
         '/isiSaldo': (context) => IsiSaldoPage(),
       },
-      home: DanaHome(),
     );
   }
 }
@@ -574,6 +652,7 @@ class DanaHome extends StatelessWidget {
       ],
     );
   }
+
 
   Widget _buildTopIcon(IconData icon, String label) {
     return Column(
